@@ -85,6 +85,9 @@ namespace m2sp {
             statBox.VerticalScroll.Maximum = 3160;
         }
 
-        public MagickFrom(Point location) : base(location) { }
+        public MagickFrom(Point location) : base(location) {
+            this.Name = "MagickFrom";
+            this.Text = "Magicks List";
+        }
     }
 }
