@@ -20,3 +20,14 @@ C:\Users\oiltanker\AppData\Roaming\Git\M2SP\m2sp\m2sp\obj\Release\m2sp.Propertie
 C:\Users\oiltanker\AppData\Roaming\Git\M2SP\m2sp\m2sp\obj\Release\m2sp.MagickFrom.resources
 C:\Users\oiltanker\AppData\Roaming\Git\M2SP\m2sp\m2sp\obj\Release\m2sp.StatForm.resources
 C:\Users\oiltanker\AppData\Roaming\Git\M2SP\m2sp\m2sp\obj\Release\m2sp.csproj.GenerateResource.Cache
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\bin\Release\m2sp.exe.config
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.exe
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.pdb
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\bin\Release\m2sp.exe
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\bin\Release\m2sp.pdb
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.csprojResolveAssemblyReference.cache
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.MainForm.resources
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.Properties.Resources.resources
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.MagickFrom.resources
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.StatForm.resources
+C:\Users\oiltanker\AppData\Roaming\Git\M2SP\src\m2sp\obj\Release\m2sp.csproj.GenerateResource.Cache
