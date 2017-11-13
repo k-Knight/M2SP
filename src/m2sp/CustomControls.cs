@@ -25,12 +25,31 @@ namespace m2sp {
         }
     }
 
-    public class SpellTextBox : TextBox {
+    public class SpellTextBox : Label {
+        private static readonly Font font = AppFont.getAppFont(AppFontSize.Medium);
+
         public void SetStyle() {
             BackColor = Color.FromArgb(255, 15, 10, 5);
             ForeColor = Color.FromArgb(255, 255, 200, 100);
+            UseCompatibleTextRendering = true;
             Font = AppFont.getAppFont(AppFontSize.Medium);
             BorderStyle = System.Windows.Forms.BorderStyle.None;
+        }
+    }
+
+    public class FancyLabel : Label {
+        public void SetStyle(AppFontSize fontSize) {
+            BackColor = Color.Transparent;
+            UseCompatibleTextRendering = true;
+            Font = AppFont.getAppFont(fontSize);
+        }
+    }
+
+    public class FancyButton : Button {
+        public void SetStyle(AppFontSize fontSize) {
+            BackColor = Color.FromArgb(255, 10, 5, 0);
+            UseCompatibleTextRendering = true;
+            Font = AppFont.getAppFont(fontSize);
         }
     }
 }

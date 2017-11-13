@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace m2sp {
-    enum AppFontSize {
+    public enum AppFontSize {
         Big,
         Small,
         Medium
@@ -30,30 +30,17 @@ namespace m2sp {
             return null;
         }
 
-        [DllImport("gdi32.dll", ExactSpelling = true)] // Adding a private font (Win2000 and later)
-        private static extern IntPtr AddFontMemResourceEx(byte[] pbFont, int cbFont, IntPtr pdv, out uint pcFonts);
-
-        [DllImport("gdi32.dll", ExactSpelling = true)] // Cleanup of a private font (Win2000 and later)
-        internal static extern bool RemoveFontMemResourceEx(IntPtr fh);        
-
-        public static Font GetSpecialFont(float size) {
+        private static Font GetSpecialFont(float size) {
             Font fnt = null;
 
             if (null == m_pfc) {
                 Stream stmFont = Assembly.GetExecutingAssembly().GetManifestResourceStream(
                     m2sp.Properties.Resources.AppFontName);
-
+            
                 if (null != stmFont) {
-                    // First read the font into a buffer
                     byte[] rgbyt = new Byte[stmFont.Length];
                     stmFont.Read(rgbyt, 0, rgbyt.Length);
-                    // Then do the unmanaged font (Windows 2000 and later)
-                    // The reason this works is that GDI+ will create a font object for
-                    // controls like the RichTextBox and this call will make sure that GDI
-                    // recognizes the font name, later.
-                    uint cFonts;
-                    AddFontMemResourceEx(rgbyt, rgbyt.Length, IntPtr.Zero, out cFonts);
-                    // Now do the managed font
+
                     IntPtr pbyt = Marshal.AllocCoTaskMem(rgbyt.Length);
                     if (null != pbyt) {
                         Marshal.Copy(rgbyt, 0, pbyt, rgbyt.Length);
@@ -64,7 +51,7 @@ namespace m2sp {
                 }
             }
             if (m_pfc.Families.Length > 0)
-                fnt = new Font(m_pfc.Families[0], size);
+                fnt = new Font(m_pfc.Families[0], size, FontStyle.Regular);
 
             return fnt;
         }

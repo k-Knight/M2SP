@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -20,6 +19,18 @@ namespace m2sp {
             minimizeButton.BackColor = Color.FromArgb(255, 10, 5, 0);
             // title bar
             menuPanel.BackColor = Color.FromArgb(31, 255, 230, 150);
+        }
+
+        protected FancyLabel CreateFancyLabel(string text, AppFontSize fontSize, int hSize, int vSize) {
+            FancyLabel label = new FancyLabel() {
+                Text = text,
+                Anchor = AnchorStyles.Left,
+                AutoSize = false,
+                Size = new Size(hSize, vSize)
+            };
+            label.SetStyle(fontSize);
+
+            return label;
         }
 
         private void AddStatistics(int magick) {
@@ -42,45 +53,30 @@ namespace m2sp {
             avgTime = (double)stats.timeSum / (double)stats.timeDiv;
             succRate = (double)stats.correctCount / (double)stats.attemptCount;
             // Spell label
-            statBox.Controls.Add(new Label() {
-                Text = name,
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Medium),
-                Size = new Size(300, 30)
-            });
+            statBox.Controls.Add(CreateFancyLabel(
+                name,
+                AppFontSize.Medium,
+                300, 30));
             // Redundancy
-            statBox.Controls.Add(new Label() {
-                Text = String.Format("    average redundancy: {0:0.00}%", avgRedundancy * 100.0),
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Small),
-                Size = new Size(300, 30)
-            });
+            statBox.Controls.Add(CreateFancyLabel(
+                String.Format("    average redundancy: {0:0.00}%", avgRedundancy * 100.0),
+                AppFontSize.Small,
+                300, 30));
             // Time
-            statBox.Controls.Add(new Label() {
-                Text = String.Format("    average time (seconds): {0:0.00}", avgTime / 1000),
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Small),
-                Size = new Size(300, 30)
-            });
+            statBox.Controls.Add(CreateFancyLabel(
+                String.Format("    average time (seconds): {0:0.00}", avgTime / 1000),
+                AppFontSize.Small,
+                300, 30));
             // Success rate
-            statBox.Controls.Add(new Label() {
-                Text = String.Format("    success rate: {0:0.00}%", succRate * 100.0),
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Small),
-                Size = new Size(300, 30)
-            });
+            statBox.Controls.Add(CreateFancyLabel(
+                String.Format("    success rate: {0:0.00}%", succRate * 100.0),
+                AppFontSize.Small,
+                300, 30));
             // Attempts
-            statBox.Controls.Add(new Label() {
-                Text = attemptsText,
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Small),
-                Size = new Size(300, 30)
-            });
+            statBox.Controls.Add(CreateFancyLabel(
+                attemptsText,
+                AppFontSize.Small,
+                300, 30));
         }
 
         protected virtual void AddStatHolders() {
@@ -119,10 +115,15 @@ namespace m2sp {
         }
 
         private void StatForm_Load(object sender, EventArgs e) {
-            menuPanel.MouseDown += new MouseEventHandler(moveFormHandler);
+            FormMovement.Subscribe(menuPanel, this);
             this.Location = location;
             this.Refresh();
             statBox.MouseWheel += new MouseEventHandler(statBox_MouseMove);
+            this.FormClosing += new FormClosingEventHandler(StatForm_Closing);
+        }
+
+        private void StatForm_Closing(object sender, FormClosingEventArgs e) {
+            FormMovement.Unsubscribe(this);
         }
 
         // =============== Mouse track ===================
@@ -151,25 +152,6 @@ namespace m2sp {
             this.ShowDialog();
             return this.Location;
         }
-
-        // ============================================
-        // ============= Window Movement ==============
-        private const int WM_NCLBUTTONDOWN = 0xA1;
-        private const int HT_CAPTION = 0x2;
-
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        private void moveFormHandler(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-        // ============= Window Movement ==============
-        // ============================================
 
         private void minimizeButton_Click(object sender, EventArgs e) {
             this.WindowState = FormWindowState.Minimized;

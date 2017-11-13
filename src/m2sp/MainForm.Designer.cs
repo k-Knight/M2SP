@@ -24,15 +24,15 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.showStatsBtn = new System.Windows.Forms.Button();
-            this.resetStatsBtn = new System.Windows.Forms.Button();
-            this.spellEnterLabel = new System.Windows.Forms.Label();
-            this.spellDisplayLabel = new System.Windows.Forms.Label();
+            this.showStatsBtn = new FancyButton();
+            this.resetStatsBtn = new FancyButton();
+            this.spellEnterLabel = new FancyLabel();
+            this.spellDisplayLabel = new FancyLabel();
             this.minimizeButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.separator = new System.Windows.Forms.Label();
             this.menuPanel = new System.Windows.Forms.Panel();
-            this.listMagicksButton = new System.Windows.Forms.Button();
+            this.listMagicksButton = new FancyButton();
             this.spellBoxPanel = new System.Windows.Forms.Panel();
             this.magickPicture = new m2sp.ElemPictureBox();
             this.elemSlotPic5 = new m2sp.ElemPictureBox();
@@ -297,11 +297,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button showStatsBtn;
-        private System.Windows.Forms.Button resetStatsBtn;
-        private System.Windows.Forms.Label spellEnterLabel;
+        private FancyButton showStatsBtn;
+        private FancyButton resetStatsBtn;
+        private FancyLabel spellEnterLabel;
         private SpellTextBox spellTextBox;
-        private System.Windows.Forms.Label spellDisplayLabel;
+        private FancyLabel spellDisplayLabel;
         private ElemPictureBox elemSlotPic1;
         private ElemPictureBox elemSlotPic2;
         private ElemPictureBox elemSlotPic3;
@@ -313,7 +313,7 @@
         private System.Windows.Forms.Panel menuPanel;
         private System.Windows.Forms.Panel spellBoxPanel;
         private ElemPictureBox magickPicture;
-        private System.Windows.Forms.Button listMagicksButton;
+        private FancyButton listMagicksButton;
     }
 }
 

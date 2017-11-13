@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Windows.Input;
-using SysWinForms = System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 
@@ -35,17 +33,14 @@ namespace m2sp {
             spellEnterLabel.BackColor = Color.Transparent;
             separator.BackColor = Color.FromArgb(63, 255, 230, 150);
             // other contols
-            resetStatsBtn.BackColor = Color.FromArgb(255, 10, 5, 0);
-            showStatsBtn.BackColor = Color.FromArgb(255, 10, 5, 0);
             closeButton.BackColor = Color.FromArgb(255, 10, 5, 0);
             minimizeButton.BackColor = Color.FromArgb(255, 10, 5, 0);
-            listMagicksButton.BackColor = Color.FromArgb(255, 10, 5, 0);
             // fonsts
-            spellEnterLabel.Font = AppFont.getAppFont(AppFontSize.Big);
-            spellDisplayLabel.Font = AppFont.getAppFont(AppFontSize.Big);
-            showStatsBtn.Font = AppFont.getAppFont(AppFontSize.Medium);
-            resetStatsBtn.Font = AppFont.getAppFont(AppFontSize.Medium);
-            listMagicksButton.Font = AppFont.getAppFont(AppFontSize.Small);
+            spellEnterLabel.SetStyle(AppFontSize.Big);
+            spellDisplayLabel.SetStyle(AppFontSize.Big);
+            showStatsBtn.SetStyle(AppFontSize.Medium);
+            resetStatsBtn.SetStyle(AppFontSize.Medium);
+            listMagicksButton.SetStyle(AppFontSize.Small);
             // images
             magickPicture.SetStyle();
             elemSlotPic1.SetStyle();
@@ -69,9 +64,15 @@ namespace m2sp {
         }
 
         private void mainForm_Load(object sender, EventArgs e) {
+            FormMovement.Subscribe(menuPanel, this);
             spell = new List<int>();
-            menuPanel.MouseDown += new SysWinForms.MouseEventHandler(moveFormHandler);
             getMagick();
+
+            this.FormClosing += new FormClosingEventHandler(MainForm_Closing);
+        }
+
+        private void MainForm_Closing(object sender, FormClosingEventArgs e) {
+            FormMovement.Unsubscribe(this);
         }
 
         // reduce flickering
@@ -84,25 +85,6 @@ namespace m2sp {
                 return cp;
             }
         }
-
-        // ============================================
-        // ============= Window Movement ==============
-        private const int WM_NCLBUTTONDOWN = 0xA1;
-        private const int HT_CAPTION = 0x2;
-
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        private void moveFormHandler(object sender, SysWinForms.MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-        // ============= Window Movement ==============
-        // ============================================
 
         private void showStatsBtn_Click(object sender, EventArgs e) {
             StatForm statForm = new StatForm(this.Location);
