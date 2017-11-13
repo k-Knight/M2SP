@@ -42,13 +42,10 @@ namespace m2sp {
             FlowLayoutPanel magickPanel = createAuxPannel(
                 String.Format("magickPanel{0}", magick), 94);
 
-            magickPanel.Controls.Add(new Label() {
-                Text = Magick.names[magick],
-                Anchor = AnchorStyles.Left,
-                AutoSize = false,
-                Font = AppFont.getAppFont(AppFontSize.Big),
-                Size = new Size(200, 60)
-            });
+            magickPanel.Controls.Add(CreateFancyLabel(
+                Magick.names[magick],
+                AppFontSize.Big,
+                200, 60));
 
             ElemPictureBox magickImg = new ElemPictureBox();
             magickImg.Size = new Size(90, 90);

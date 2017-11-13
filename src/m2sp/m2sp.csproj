@@ -72,6 +72,7 @@
     <Compile Include="CustomControls.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormMovement.cs" />
     <Compile Include="ImageLoader.cs" />
     <Compile Include="Magick.cs" />
     <Compile Include="MainForm.cs">
