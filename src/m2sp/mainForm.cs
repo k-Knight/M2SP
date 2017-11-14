@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Diagnostics;
 using System.Threading;
 
@@ -204,7 +203,7 @@ namespace m2sp {
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            if ((Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)) && Keyboard.IsKeyDown(Key.F4))
+            if (keyData == (Keys.F4 | Keys.Alt))
                     this.Close();
             if ((keyData == Keys.Q) ||
                 (keyData == Keys.W) ||

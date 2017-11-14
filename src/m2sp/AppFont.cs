@@ -51,7 +51,7 @@ namespace m2sp {
                 }
             }
             if (m_pfc.Families.Length > 0)
-                fnt = new Font(m_pfc.Families[0], size, FontStyle.Regular);
+                fnt = new Font(m_pfc.Families[0], size, FontStyle.Bold);
 
             return fnt;
         }
